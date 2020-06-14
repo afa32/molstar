@@ -6,9 +6,7 @@
 
 import { createPlugin, DefaultPluginSpec } from '../../mol-plugin';
 import { BuiltInTrajectoryFormat } from '../../mol-plugin-state/formats/trajectory';
-import { PluginCommands } from '../../mol-plugin/commands';
 import { PluginContext } from '../../mol-plugin/context';
-import { Color } from '../../mol-util/color';
 import './index.html';
 
 import { Asset } from '../../mol-util/assets';
@@ -28,6 +26,9 @@ class BasicWrapper {
                     isExpanded: true,
                     showControls: true
                 }
+                // controls: {
+                //     left: 'none'
+                // }
             },
             components: {
                 remoteState: 'none'
@@ -52,9 +53,9 @@ class BasicWrapper {
 
         const builder = this.plugin.builders.structure.representation;
         const update = this.plugin.build();
-        if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: "cartoon", typeParams: { alpha: 1 } }, { tag: 'polymer' });
-        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: "cartoon" }, { tag: 'ligand' });
-        if (components.water) builder.buildRepresentation(update, components.water, { type: "cartoon", typeParams: { alpha: 1 } }, { tag: 'water' });
+        if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: 'cartoon', typeParams: { alpha: 1 } }, { tag: 'polymer' });
+        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: 'cartoon' }, { tag: 'ligand' });
+        if (components.water) builder.buildRepresentation(update, components.water, { type: 'cartoon', typeParams: { alpha: 1 } }, { tag: 'water' });
         await update.commit();
     }
 
@@ -75,9 +76,9 @@ class BasicWrapper {
 
         const builder = this.plugin.builders.structure.representation;
         const update = this.plugin.build();
-        if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: "gaussian-surface", typeParams: { alpha: 0.3 } }, { tag: 'polymer' });
-        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: "gaussian-surface" }, { tag: 'ligand' });
-        if (components.water) builder.buildRepresentation(update, components.water, { type: "gaussian-surface", typeParams: { alpha: 0.3 } }, { tag: 'water' });
+        if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: 'gaussian-surface', typeParams: { alpha: 0.5 } }, { tag: 'polymer' });
+        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: 'gaussian-surface' }, { tag: 'ligand' });
+        if (components.water) builder.buildRepresentation(update, components.water, { type: 'gaussian-surface', typeParams: { alpha: 0.5 } }, { tag: 'water' });
         await update.commit();
     }
 }
