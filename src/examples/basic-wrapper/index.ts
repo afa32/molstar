@@ -7,6 +7,7 @@
 import { createPlugin, DefaultPluginSpec } from '../../mol-plugin';
 import { BuiltInTrajectoryFormat } from '../../mol-plugin-state/formats/trajectory';
 import { PluginContext } from '../../mol-plugin/context';
+import { ColorNames } from '../../mol-util/color/names';
 import './index.html';
 
 import { Asset } from '../../mol-util/assets';
@@ -54,8 +55,8 @@ class BasicWrapper {
         const builder = this.plugin.builders.structure.representation;
         const update = this.plugin.build();
         if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: 'cartoon', typeParams: { alpha: 1 } }, { tag: 'polymer' });
-        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: 'cartoon' }, { tag: 'ligand' });
-        if (components.water) builder.buildRepresentation(update, components.water, { type: 'cartoon', typeParams: { alpha: 1 } }, { tag: 'water' });
+        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: 'ball-and-stick' }, { tag: 'ligand' });
+        if (components.water) builder.buildRepresentation(update, components.water, { type: 'point', typeParams: { alpha: 1 } }, { tag: 'water' });
         await update.commit();
     }
 
@@ -76,9 +77,9 @@ class BasicWrapper {
 
         const builder = this.plugin.builders.structure.representation;
         const update = this.plugin.build();
-        if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: 'gaussian-surface', typeParams: { alpha: 0.5 } }, { tag: 'polymer' });
-        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: 'gaussian-surface' }, { tag: 'ligand' });
-        if (components.water) builder.buildRepresentation(update, components.water, { type: 'gaussian-surface', typeParams: { alpha: 0.5 } }, { tag: 'water' });
+        if (components.polymer) builder.buildRepresentation(update, components.polymer, { type: 'molecular-surface', typeParams: { alpha: 0.5 }, color: 'uniform', colorParams: { value: ColorNames.blue } }, { tag: 'polymer' });
+        if (components.ligand) builder.buildRepresentation(update, components.ligand, { type: 'ball-and-stick' }, { tag: 'ligand' });
+        if (components.water) builder.buildRepresentation(update, components.water, { type: 'point', typeParams: { alpha: 1 } }, { tag: 'water' });
         await update.commit();
     }
 }
