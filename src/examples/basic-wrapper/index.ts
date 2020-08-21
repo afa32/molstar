@@ -26,10 +26,11 @@ class BasicWrapper {
                 initial: {
                     isExpanded: true,
                     showControls: true
+                },
+                controls: {
+                    left: 'none',
+                    bottom: 'none'
                 }
-                // controls: {
-                //     left: 'none'
-                // }
             },
             components: {
                 remoteState: 'none'
